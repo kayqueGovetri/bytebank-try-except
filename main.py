@@ -20,8 +20,8 @@ class CheckingAccount:
 
         self.__set_agency(agency)
         self.__set_number(number)
-        CheckingAccount.total_accounts_created += 1
-        CheckingAccount.operation_fee = 30 / CheckingAccount.total_accounts_created
+        # CheckingAccount.total_accounts_created += 1
+        # CheckingAccount.operation_fee = 30 / CheckingAccount.total_accounts_created
 
     @property
     def agency(self):
@@ -79,8 +79,8 @@ def main():
             sys.exit()
 
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()
 
 account = CheckingAccount(None, 400, 1234567)
 account.deposit(50)

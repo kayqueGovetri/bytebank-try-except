@@ -5,3 +5,4 @@ class InsufficientBalanceError(Exception):
         msg = "Insufficient balance to execute the transaction \n" \
               f"Balance: {self.balance} and Amount to be withdrawn: {self.value}"
         super(InsufficientBalanceError, self).__init__(message or msg)
+    pass
