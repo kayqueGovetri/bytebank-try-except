@@ -1,3 +1,4 @@
+from exceptions import InsufficientBalanceError
 
 
 class Client:
@@ -30,14 +31,17 @@ class CheckingAccount:
     def number(self):
         return self.agency
 
-    @property
-    def balance(self):
-        return self.balance
-
     def transfer(self, value, favored):
+        if value < 0:
+            raise ValueError("The amount withdrawn cannot be less than zero.")
+        self.withdraw(value)
         favored.deposit(value)
 
     def withdraw(self, value):
+        if value < 0:
+            raise ValueError("The amount withdrawn cannot be less than zero.")
+        if self.balance < value:
+            raise InsufficientBalanceError(balance=self.balance, value=value)
         self.balance -= value
 
     def deposit(self, value):
@@ -56,10 +60,6 @@ class CheckingAccount:
         if value <= 0:
             raise ValueError("O atributo numero deve ser maior que zero")
         self.__number = value
-
-    @balance.setter
-    def balance(self, value):
-        self._balance = value
 
 
 def main():
@@ -81,3 +81,8 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+account = CheckingAccount(None, 400, 1234567)
+account.deposit(50)
+account.withdraw(-250)
+print("Balance: ", account.balance)
